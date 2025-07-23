@@ -1,6 +1,6 @@
 {
   "name": "fluttertools",
-  "displayName": "FlutterTools",
+  "displayName": "Flutter Tools",
   "description": "",
   "version": "0.0.1",
   "engines": {
@@ -14,10 +14,74 @@
   "contributes": {
     "commands": [
       {
-        "command": "fluttertools.helloWorld",
-        "title": "Hello World"
+        "command": "fluttertools.createPage",
+        "title": "📄 Create Flutter Page",
+        "category": "Flutter"
+      },
+      {
+        "command": "fluttertools.createPageWithTemplate",
+        "title": "📄 Create Flutter Page with Template",
+        "category": "Flutter"
       }
-    ]
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "submenu": "fluttertools.submenu",
+          "when": "explorerResourceIsFolder",
+          "group": "flutter"
+        }
+      ],
+      "fluttertools.submenu": [
+        {
+          "command": "fluttertools.createPage",
+          "group": "flutter",
+          "when": "explorerResourceIsFolder"
+        },
+        {
+          "command": "fluttertools.createPageWithTemplate",
+          "group": "flutter",
+          "when": "explorerResourceIsFolder"
+        }
+      ]
+    },
+    "submenus": [
+      {
+        "id": "fluttertools.submenu",
+        "label": "Flutter Tools"
+      },
+      {
+        "id": "fluttertools.submenu",
+        "label": "Flutter Tools"
+      }
+    ],
+    "configuration": {
+      "title": "Flutter Page Generator",
+      "properties": {
+        "flutterPageGenerator.defaultTemplate": {
+          "type": "string",
+          "default": "stateless",
+          "enum": [
+            "stateless",
+            "stateful",
+            "bloc",
+            "provider",
+            "custom"
+          ],
+          "description": "Default template to use when creating Flutter pages"
+        },
+        "flutterPageGenerator.customTemplates": {
+          "type": "object",
+          "default": {},
+          "description": "Custom templates for Flutter pages"
+        },
+        "flutterPageGenerator.includeTests": {
+          "type": "boolean",
+          "default": true,
+          "description": "Include test files when creating pages"
+        }
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run package",
