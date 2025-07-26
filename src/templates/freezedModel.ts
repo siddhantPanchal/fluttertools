@@ -42,7 +42,9 @@ async function convertJsonToClass(jsonSchemaString: string, typeName: string) {
 }
 
 export default async function generateFreezedClass(uri: vscode.Uri) {
-  const folderPath = uri ? uri.fsPath : await getWorkspaceFolder();
+  const folderPath = uri
+    ? uri.fsPath
+    : (await getWorkspaceFolder())?.uri.fsPath;
   if (!folderPath) {
     return;
   }

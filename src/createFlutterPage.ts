@@ -11,7 +11,9 @@ import {
 import getAvailableTemplates, { PageTemplate } from "./templates";
 
 export default async function createFlutterPage(uri: vscode.Uri) {
-  const folderPath = uri ? uri.fsPath : await getWorkspaceFolder();
+  const folderPath = uri
+    ? uri.fsPath
+    : (await getWorkspaceFolder())?.uri.fsPath;
   if (!folderPath) {
     return;
   }

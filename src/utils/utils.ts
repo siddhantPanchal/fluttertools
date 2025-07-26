@@ -65,7 +65,9 @@ function pascalToSnakeCase(pascalCaseString: string): string {
     : snakeCaseString;
 }
 
-async function getWorkspaceFolder(): Promise<string | undefined> {
+async function getWorkspaceFolder(): Promise<
+  vscode.WorkspaceFolder | undefined | null
+> {
   const workspaceFolders = vscode.workspace.workspaceFolders;
   if (!workspaceFolders) {
     vscode.window.showErrorMessage("No workspace folder found");
@@ -73,18 +75,9 @@ async function getWorkspaceFolder(): Promise<string | undefined> {
   }
 
   if (workspaceFolders.length === 1) {
-    return workspaceFolders[0].uri.fsPath;
+    return workspaceFolders[0];
   }
-
-  const selectedFolder = await vscode.window.showQuickPick(
-    workspaceFolders.map((folder) => ({
-      label: folder.name,
-      value: folder.uri.fsPath,
-    })),
-    { placeHolder: "Select workspace folder" }
-  );
-
-  return selectedFolder?.value;
+  return null;
 }
 
 function camelToTitleCase(camelCaseString: string) {

@@ -15,18 +15,28 @@
     "commands": [
       {
         "command": "fluttertools.createPage",
-        "title": "📝 Create Flutter Page",
+        "title": "Create Flutter Page",
         "category": "flutter@page"
       },
       {
         "command": "fluttertools.installDependencies",
-        "title": "🔗 Install Dependencies",
+        "title": "Install Dependencies",
         "category": "flutter@dep"
       },
       {
         "command": "fluttertools.freezedModel",
-        "title": "❄️ Create Freezed Model",
+        "title": "Create Freezed Model",
         "category": "flutter@model"
+      },
+      {
+        "command": "fluttertools.flavorizrSupport",
+        "title": "Add Flavorizr Support",
+        "category": "flutter@flavorizrSupport"
+      },
+      {
+        "command": "fluttertools.addFlavor",
+        "title": "Add New Flavor",
+        "category": "flutter@flavorizrSupport"
       }
     ],
     "menus": {
@@ -51,6 +61,16 @@
         {
           "command": "fluttertools.freezedModel",
           "group": "flutter@model",
+          "when": "explorerResourceIsFolder"
+        },
+        {
+          "command": "fluttertools.flavorizrSupport",
+          "group": "flutter@flavorizrSupport",
+          "when": "explorerResourceIsFolder"
+        },
+        {
+          "command": "fluttertools.addFlavor",
+          "group": "flutter@flavorizrSupport",
           "when": "explorerResourceIsFolder"
         }
       ]
