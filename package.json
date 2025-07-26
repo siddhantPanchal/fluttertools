@@ -37,6 +37,11 @@
         "command": "fluttertools.addFlavor",
         "title": "Add New Flavor",
         "category": "flutter@flavorizrSupport"
+      },
+      {
+        "command": "fluttertools.buildFlavors",
+        "title": "Build Flavors",
+        "category": "flutter@flavorizrSupport"
       }
     ],
     "menus": {
@@ -70,6 +75,11 @@
         },
         {
           "command": "fluttertools.addFlavor",
+          "group": "flutter@flavorizrSupport",
+          "when": "explorerResourceIsFolder"
+        },
+        {
+          "command": "fluttertools.buildFlavors",
           "group": "flutter@flavorizrSupport",
           "when": "explorerResourceIsFolder"
         }
@@ -124,13 +134,17 @@
     "test": "vscode-test"
   },
   "devDependencies": {
+    "@types/command-line-args": "^5.2.3",
     "@types/mocha": "^10.0.10",
     "@types/node": "20.x",
+    "@types/readable-stream": "^4.0.21",
+    "@types/urijs": "^1.19.25",
     "@types/vscode": "^1.102.0",
     "@typescript-eslint/eslint-plugin": "^8.31.1",
     "@typescript-eslint/parser": "^8.31.1",
     "@vscode/test-cli": "^0.0.11",
     "@vscode/test-electron": "^2.5.2",
+    "command-line-args": "^6.0.1",
     "esbuild": "^0.25.3",
     "eslint": "^9.25.1",
     "npm-run-all": "^4.1.5",

@@ -4,6 +4,11 @@ import * as path from "path";
 import * as yaml from "yaml";
 import { camelToTitleCase, getWorkspaceFolder } from "./utils/utils";
 
+import { exec } from "child_process";
+import { promisify } from "util";
+
+const execAsync = promisify(exec);
+
 export default async function addFlavorizrSupport(uri: vscode.Uri) {
   const folder = await getWorkspaceFolder();
   if (!folder) {
@@ -60,6 +65,22 @@ export async function addFlavor(uri: vscode.Uri) {
     };
   }
   fs.writeFileSync(flavorizrPath, yaml.stringify(content));
+}
+
+export async function runFlavors() {
+  try {
+    const folder = await getWorkspaceFolder();
+    if (!folder) {
+      return;
+    }
+    const workspaceFolder = folder.uri.fsPath;
+
+    const command = "flutter pub run flutter_flavorizr";
+
+    await execAsync(command, { cwd: workspaceFolder });
+  } catch (error) {
+    vscode.window.showErrorMessage(`Error running command: ${error}`);
+  }
 }
 
 export function hasFlutterProject(): boolean {
@@ -287,7 +308,6 @@ async function getDefaultContent(
   let instructions: string[] = [
     "assets:download",
     "assets:extract",
-    "assets:clean",
     "ide:config",
   ];
 
@@ -323,6 +343,8 @@ async function getDefaultContent(
     };
     instructions = instructions.concat(macosInstructions());
   }
+
+  instructions = instructions.concat(["assets:clean"]);
 
   let content: {
     app: {};

@@ -7,6 +7,7 @@ import generateFreezedClass from "./templates/freezedModel";
 import addFlavorizrSupport, {
   addFlavor,
   hasFlutterProject,
+  runFlavors,
 } from "./addFlavorizrSupport";
 
 export function activate(context: vscode.ExtensionContext) {
@@ -30,6 +31,10 @@ export function activate(context: vscode.ExtensionContext) {
     vscode.commands.registerCommand(
       "fluttertools.addFlavor",
       async (uri: vscode.Uri) => addFlavor(uri)
+    ),
+    vscode.commands.registerCommand(
+      "fluttertools.buildFlavors",
+      async (uri: vscode.Uri) => runFlavors()
     )
   );
 

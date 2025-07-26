@@ -7,7 +7,9 @@ import { promisify } from "util";
 const execAsync = promisify(exec);
 
 export default async function installDependencies(uri: vscode.Uri) {
-  const workspaceFolder = uri ? uri.fsPath : await getWorkspaceFolder();
+  const workspaceFolder = uri
+    ? uri.fsPath
+    : (await getWorkspaceFolder())?.uri.fsPath;
   if (!workspaceFolder) {
     return;
   }
