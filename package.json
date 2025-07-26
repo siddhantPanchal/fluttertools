@@ -16,12 +16,17 @@
       {
         "command": "fluttertools.createPage",
         "title": "📄 Create Flutter Page",
-        "category": "Flutter"
+        "category": "flutter@page"
       },
       {
-        "command": "fluttertools.createPageWithTemplate",
-        "title": "📄 Create Flutter Page with Template",
-        "category": "Flutter"
+        "command": "fluttertools.installDependencies",
+        "title": "🔗 Install Dependencies",
+        "category": "flutter@dep"
+      },
+      {
+        "command": "fluttertools.freezedModel",
+        "title": "📄 Create Freezed Model",
+        "category": "flutter@model"
       }
     ],
     "menus": {
@@ -35,21 +40,22 @@
       "fluttertools.submenu": [
         {
           "command": "fluttertools.createPage",
-          "group": "flutter",
+          "group": "flutter@page",
           "when": "explorerResourceIsFolder"
         },
         {
-          "command": "fluttertools.createPageWithTemplate",
-          "group": "flutter",
+          "command": "fluttertools.installDependencies",
+          "group": "flutter@dep",
+          "when": "explorerResourceIsFolder"
+        },
+        {
+          "command": "fluttertools.freezedModel",
+          "group": "flutter@model",
           "when": "explorerResourceIsFolder"
         }
       ]
     },
     "submenus": [
-      {
-        "id": "fluttertools.submenu",
-        "label": "Flutter Tools"
-      },
       {
         "id": "fluttertools.submenu",
         "label": "Flutter Tools"
@@ -98,16 +104,20 @@
     "test": "vscode-test"
   },
   "devDependencies": {
-    "@types/vscode": "^1.102.0",
     "@types/mocha": "^10.0.10",
     "@types/node": "20.x",
+    "@types/vscode": "^1.102.0",
     "@typescript-eslint/eslint-plugin": "^8.31.1",
     "@typescript-eslint/parser": "^8.31.1",
-    "eslint": "^9.25.1",
-    "esbuild": "^0.25.3",
-    "npm-run-all": "^4.1.5",
-    "typescript": "^5.8.3",
     "@vscode/test-cli": "^0.0.11",
-    "@vscode/test-electron": "^2.5.2"
+    "@vscode/test-electron": "^2.5.2",
+    "esbuild": "^0.25.3",
+    "eslint": "^9.25.1",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "quicktype-core": "^23.2.6",
+    "yaml": "^2.8.0"
   }
 }
