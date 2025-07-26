@@ -94,6 +94,7 @@ const dependencies: Dependency[] = [
   { name: "recase", dev: false },
   { name: "fpdart", dev: false },
   { name: "fast_immutable_collections", dev: false },
+  { name: "envied", dev: false },
   { name: "logger", dev: false },
   { name: "path_provider", dev: false },
   { name: "bot_toast", dev: false },
@@ -109,6 +110,8 @@ const dependencies: Dependency[] = [
   { name: "injectable", dev: false },
   { name: "injectable_generator", dev: true },
 
+  { name: "google_fonts", dev: false },
+
   { name: "flutter_gen_runner ", dev: true },
 
   // Testing
@@ -119,4 +122,5 @@ const dependencies: Dependency[] = [
   { name: "auto_route_generator", dev: true },
 
   { name: "build_runner", dev: true },
+  { name: "flutter_flavorizr", dev: true },
 ];

@@ -15,7 +15,7 @@
     "commands": [
       {
         "command": "fluttertools.createPage",
-        "title": "📄 Create Flutter Page",
+        "title": "📝 Create Flutter Page",
         "category": "flutter@page"
       },
       {
@@ -25,7 +25,7 @@
       },
       {
         "command": "fluttertools.freezedModel",
-        "title": "📄 Create Freezed Model",
+        "title": "❄️ Create Freezed Model",
         "category": "flutter@model"
       }
     ],
