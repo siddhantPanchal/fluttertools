@@ -61,5 +61,6 @@ export class AssetManager {
     terminal.sendText(
       "flutter pub run build_runner build --delete-conflicting-outputs"
     );
+    vscode.window.showInformationMessage("Asset paths generated successfully!");
   }
 }

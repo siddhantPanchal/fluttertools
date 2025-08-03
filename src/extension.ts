@@ -14,21 +14,65 @@ import { AssetManager } from "./assetManager";
 export async function activate(context: vscode.ExtensionContext) {
   const workspaceFolder = await getWorkspaceFolder();
   if (!workspaceFolder) {
-    vscode.window.showErrorMessage("No workspace folder found. Please open a folder to use Flutter Tools.");
+    vscode.window.showErrorMessage(
+      "No workspace folder found. Please open a folder to use Flutter Tools."
+    );
     return;
   }
 
   const assetManager = new AssetManager(workspaceFolder.uri.fsPath);
+  let assetWatcher: vscode.FileSystemWatcher | undefined;
+  let debounceTimer: NodeJS.Timeout | undefined;
 
-  // File watcher for assets directory
-  const assetWatcher = vscode.workspace.createFileSystemWatcher(new vscode.RelativePattern(workspaceFolder, 'assets/**'));
+  function startAssetWatcher(folder: vscode.WorkspaceFolder) {
+    if (assetWatcher) {
+      assetWatcher.dispose();
+    }
+    assetWatcher = vscode.workspace.createFileSystemWatcher(
+      new vscode.RelativePattern(folder.uri.fsPath, "assets/**")
+    );
 
-  assetWatcher.onDidChange(() => assetManager.updatePubspecAssets());
-  assetWatcher.onDidCreate(() => assetManager.updatePubspecAssets());
-  assetWatcher.onDidDelete(() => assetManager.updatePubspecAssets());
+    const debouncedUpdate = () => {
+      if (debounceTimer) {
+        clearTimeout(debounceTimer);
+      }
+      debounceTimer = setTimeout(async () => {
+        await assetManager.updatePubspecAssets();
+        await assetManager.generateAssetPaths();
+        debounceTimer = undefined;
+      }, 3000); // 3 seconds debounce
+    };
 
-  context.subscriptions.push(assetWatcher);
+    assetWatcher.onDidChange(debouncedUpdate);
+    assetWatcher.onDidCreate(debouncedUpdate);
+    assetWatcher.onDidDelete(debouncedUpdate);
+
+    context.subscriptions.push(assetWatcher);
+    vscode.window.showInformationMessage("Asset watcher started.");
+  }
+
+  function stopAssetWatcher() {
+    if (assetWatcher) {
+      assetWatcher.dispose();
+      assetWatcher = undefined;
+      if (debounceTimer) {
+        clearTimeout(debounceTimer);
+        debounceTimer = undefined;
+      }
+      vscode.window.showInformationMessage("Asset watcher stopped.");
+    }
+  }
+
+  // Start the watcher initially
+  startAssetWatcher(workspaceFolder);
+
   context.subscriptions.push(
+    vscode.commands.registerCommand("fluttertools.stopAssetWatcher", () =>
+      stopAssetWatcher()
+    ),
+    vscode.commands.registerCommand("fluttertools.startAssetWatcher", () =>
+      startAssetWatcher(workspaceFolder)
+    ),
     vscode.commands.registerCommand(
       "fluttertools.createPage",
       (uri: vscode.Uri) => createFlutterPage(uri)
