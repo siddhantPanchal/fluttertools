@@ -9,39 +9,65 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
   "main": "./dist/extension.js",
   "contributes": {
     "commands": [
       {
         "command": "fluttertools.createPage",
-        "title": "Create Flutter Page",
-        "category": "flutter@page"
+        "title": "Create Page...",
+        "category": "Flutter Tools"
       },
       {
         "command": "fluttertools.installDependencies",
         "title": "Install Dependencies",
-        "category": "flutter@dep"
+        "category": "Flutter Tools"
       },
       {
         "command": "fluttertools.freezedModel",
-        "title": "Create Freezed Model",
-        "category": "flutter@model"
+        "title": "Create Freezed Model...",
+        "category": "Flutter Tools"
       },
       {
         "command": "fluttertools.flavorizrSupport",
         "title": "Add Flavorizr Support",
-        "category": "flutter@flavorizrSupport"
+        "category": "Flutter Tools"
       },
       {
         "command": "fluttertools.addFlavor",
-        "title": "Add New Flavor",
-        "category": "flutter@flavorizrSupport"
+        "title": "Add New Flavor...",
+        "category": "Flutter Tools"
       },
       {
         "command": "fluttertools.buildFlavors",
         "title": "Build Flavors",
-        "category": "flutter@flavorizrSupport"
+        "category": "Flutter Tools"
+      },
+      {
+        "command": "fluttertools.starterApp",
+        "title": "Create Flutter Starter App...",
+        "category": "Flutter Tools"
+      }
+    ],
+    "submenus": [
+      {
+        "id": "fluttertools.submenu",
+        "label": "Flutter Tools"
+      },
+      {
+        "id": "fluttertools.submenu.codegen",
+        "label": "Code Generation"
+      },
+      {
+        "id": "fluttertools.submenu.assets",
+        "label": "Asset Management"
+      },
+      {
+        "id": "fluttertools.submenu.dependencies",
+        "label": "Dependency Management"
+      },
+      {
+        "id": "fluttertools.submenu.flavors",
+        "label": "Flavor & Build"
       }
     ],
     "menus": {
@@ -54,43 +80,53 @@
       ],
       "fluttertools.submenu": [
         {
-          "command": "fluttertools.createPage",
-          "group": "flutter@page",
-          "when": "explorerResourceIsFolder"
+          "submenu": "fluttertools.submenu.codegen",
+          "group": "1_codegen"
         },
         {
-          "command": "fluttertools.installDependencies",
-          "group": "flutter@dep",
-          "when": "explorerResourceIsFolder"
+          "submenu": "fluttertools.submenu.assets",
+          "group": "2_assets"
+        },
+        {
+          "submenu": "fluttertools.submenu.dependencies",
+          "group": "3_dependencies"
+        },
+        {
+          "submenu": "fluttertools.submenu.flavors",
+          "group": "4_flavors"
+        }
+      ],
+      "fluttertools.submenu.codegen": [
+        {
+          "command": "fluttertools.createPage",
+          "group": "1_page"
         },
         {
           "command": "fluttertools.freezedModel",
-          "group": "flutter@model",
-          "when": "explorerResourceIsFolder"
-        },
+          "group": "2_model"
+        }
+      ],
+      "fluttertools.submenu.assets": [],
+      "fluttertools.submenu.dependencies": [
+        {
+          "command": "fluttertools.installDependencies"
+        }
+      ],
+      "fluttertools.submenu.flavors": [
         {
           "command": "fluttertools.flavorizrSupport",
-          "group": "flutter@flavorizrSupport",
-          "when": "explorerResourceIsFolder"
+          "group": "1_setup"
         },
         {
           "command": "fluttertools.addFlavor",
-          "group": "flutter@flavorizrSupport",
-          "when": "explorerResourceIsFolder"
+          "group": "2_manage"
         },
         {
           "command": "fluttertools.buildFlavors",
-          "group": "flutter@flavorizrSupport",
-          "when": "explorerResourceIsFolder"
+          "group": "2_manage"
         }
       ]
     },
-    "submenus": [
-      {
-        "id": "fluttertools.submenu",
-        "label": "Flutter Tools"
-      }
-    ],
     "configuration": {
       "title": "Flutter Page Generator",
       "properties": {
