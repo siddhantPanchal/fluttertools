@@ -9,8 +9,25 @@ import addFlavorizrSupport, {
   hasFlutterProject,
   runFlavors,
 } from "./addFlavorizrSupport";
+import { AssetManager } from "./assetManager";
 
-export function activate(context: vscode.ExtensionContext) {
+export async function activate(context: vscode.ExtensionContext) {
+  const workspaceFolder = await getWorkspaceFolder();
+  if (!workspaceFolder) {
+    vscode.window.showErrorMessage("No workspace folder found. Please open a folder to use Flutter Tools.");
+    return;
+  }
+
+  const assetManager = new AssetManager(workspaceFolder.uri.fsPath);
+
+  // File watcher for assets directory
+  const assetWatcher = vscode.workspace.createFileSystemWatcher(new vscode.RelativePattern(workspaceFolder, 'assets/**'));
+
+  assetWatcher.onDidChange(() => assetManager.updatePubspecAssets());
+  assetWatcher.onDidCreate(() => assetManager.updatePubspecAssets());
+  assetWatcher.onDidDelete(() => assetManager.updatePubspecAssets());
+
+  context.subscriptions.push(assetWatcher);
   context.subscriptions.push(
     vscode.commands.registerCommand(
       "fluttertools.createPage",
@@ -35,6 +52,14 @@ export function activate(context: vscode.ExtensionContext) {
     vscode.commands.registerCommand(
       "fluttertools.buildFlavors",
       async (uri: vscode.Uri) => runFlavors()
+    ),
+    vscode.commands.registerCommand(
+      "fluttertools.updatePubspecAssets",
+      async () => assetManager.updatePubspecAssets()
+    ),
+    vscode.commands.registerCommand(
+      "fluttertools.generateAssetPaths",
+      async () => assetManager.generateAssetPaths()
     )
   );
 

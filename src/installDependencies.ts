@@ -1,11 +1,6 @@
 import * as vscode from "vscode";
 import { getWorkspaceFolder } from "./utils/utils";
 
-import { exec } from "child_process";
-import { promisify } from "util";
-
-const execAsync = promisify(exec);
-
 export default async function installDependencies(uri: vscode.Uri) {
   const workspaceFolder = uri
     ? uri.fsPath
@@ -14,52 +9,25 @@ export default async function installDependencies(uri: vscode.Uri) {
     return;
   }
 
-  const progress = vscode.window.withProgress(
-    {
-      location: vscode.ProgressLocation.Notification,
-      title: "Installing Flutter Dependencies",
-      cancellable: false,
-    },
-    async (progress) => {
-      let totalSteps = dependencies.length;
-      let completedSteps = 0;
+  const terminal = vscode.window.createTerminal({
+    name: "Flutter Tools",
+    cwd: workspaceFolder,
+  });
+  terminal.show();
 
-      progress.report({ increment: 0 });
+  let fullCommand = "flutter pub add ";
+  for (const dep of dependencies.filter((d) => !d.dev)) {
+    const command = ` ${dep.name} `;
+    fullCommand += command;
+  }
+  fullCommand += "&& flutter pub add --dev ";
+  for (const dep of dependencies.filter((d) => d.dev)) {
+    const command = ` ${dep.name} `;
+    fullCommand += command;
+  }
 
-      for (const dep of dependencies) {
-        progress.report({
-          message: `Installing ${dep.name}...`,
-          increment: (completedSteps / totalSteps) * 100,
-        });
-
-        try {
-          const command = dep.dev
-            ? `flutter pub add dev:${dep.name}`
-            : `flutter pub add ${dep.name}`;
-
-          await execAsync(command, { cwd: workspaceFolder });
-          completedSteps++;
-        } catch (error) {
-          vscode.window.showErrorMessage(`Failed to install ${dep}`);
-        }
-      }
-
-      progress.report({ message: "Running flutter pub get...", increment: 95 });
-
-      try {
-        await execAsync("flutter pub get", { cwd: workspaceFolder });
-      } catch (error) {
-        vscode.window.showWarningMessage(
-          "flutter pub get failed. You may need to run it manually."
-        );
-      } finally {
-        progress.report({
-          message: "Flutter dependencies installed!",
-          increment: 100,
-        });
-      }
-    }
-  );
+  fullCommand += "&& flutter pub get --no-example";
+  terminal.sendText(fullCommand);
 }
 
 interface Dependency {

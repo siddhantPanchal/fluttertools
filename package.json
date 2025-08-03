@@ -46,6 +46,16 @@
         "command": "fluttertools.starterApp",
         "title": "Create Flutter Starter App...",
         "category": "Flutter Tools"
+      },
+      {
+        "command": "fluttertools.updatePubspecAssets",
+        "title": "Update pubspec.yaml Assets",
+        "category": "Flutter Tools"
+      },
+      {
+        "command": "fluttertools.generateAssetPaths",
+        "title": "Generate Asset Paths",
+        "category": "Flutter Tools"
       }
     ],
     "submenus": [
@@ -106,7 +116,14 @@
           "group": "2_model"
         }
       ],
-      "fluttertools.submenu.assets": [],
+      "fluttertools.submenu.assets": [
+        {
+          "command": "fluttertools.updatePubspecAssets"
+        },
+        {
+          "command": "fluttertools.generateAssetPaths"
+        }
+      ],
       "fluttertools.submenu.dependencies": [
         {
           "command": "fluttertools.installDependencies"

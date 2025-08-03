@@ -17,13 +17,13 @@ This document outlines the development plan for the Flutter Tools extension.
 ## Phase 3: Asset Management (In Progress)
 
 - [ ] **Asset Management Helper**
-  - [ ] **Automated `pubspec.yaml` Updates**
+  - [x] **Automated `pubspec.yaml` Updates**
     - [ ] Implement a file watcher for the `assets/` directory.
     - [ ] On file change (add, delete, rename), read the `assets/` directory structure.
     - [ ] Parse the `pubspec.yaml` file to locate the `flutter.assets` section.
     - [ ] Update the `assets` list with the new directory contents.
     - [ ] Ensure `pubspec.yaml` formatting and comments are preserved.
-  - [ ] **Integrate `flutter_gen` for Asset Path Generation**
+  - [x] **Integrate `flutter_gen` for Asset Path Generation**
     - [ ] Ensure `flutter_gen` is a dev dependency in `pubspec.yaml` (or prompt user to add/install).
     - [ ] After `pubspec.yaml` is updated (or on a manual command), run `flutter pub run build_runner build` to generate asset paths.
 
