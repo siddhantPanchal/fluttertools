@@ -92,6 +92,10 @@ function camelToTitleCase(camelCaseString: string) {
   return titleCaseString.trim();
 }
 
+function pascalToCamelCase(str: string): string {
+  return str.charAt(0).toLowerCase() + str.slice(1);
+}
+
 export {
   getImportPath,
   findTestDirectory,
@@ -100,4 +104,5 @@ export {
   camelToTitleCase,
   camelCaseToSnakeCase,
   pascalToSnakeCase,
+  pascalToCamelCase,
 };

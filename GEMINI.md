@@ -20,15 +20,19 @@ This document provides a summary of the project's goals, status, and plans to en
 
 ## 3. Development Plan: Asset Management Helper
 
-This is the active development phase. The plan consists of two main sub-features:
+This is the active development phase. The plan consists of three main sub-features:
 
 1.  **Automated `pubspec.yaml` Updates:**
     - **Goal:** Watch the `assets/` directory and automatically update the `pubspec.yaml` file when assets are added, removed, or renamed.
-    - **Key Steps:** Implement a file watcher, parse `pubspec.yaml`, and write the updated asset list while preserving formatting.
+    - **Key Steps:** Implement a file watcher with a 3-second debounce, parse `pubspec.yaml`, and write the updated asset list while preserving formatting.
 
 2.  **Asset Path Class Generation:**
     - **Goal:** Create a command (`fluttertools.generateAssetPaths`) that generates a Dart class with static constants for all asset paths.
     - **Key Steps:** Register the new command, scan the `assets/` directory, convert file names to valid Dart variable names, and generate the `app_assets.dart` file.
+
+3.  **Asset Watcher Control:**
+    - **Goal:** Provide commands to manually start and stop the asset watcher.
+    - **Key Steps:** Implement `fluttertools.startAssetWatcher` and `fluttertools.stopAssetWatcher` commands.
 
 ## 4. Key Project Files
 

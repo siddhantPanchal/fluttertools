@@ -10,6 +10,10 @@ import addFlavorizrSupport, {
   runFlavors,
 } from "./addFlavorizrSupport";
 import { AssetManager } from "./assetManager";
+import { createClass } from "./createClass";
+import { createProvider } from "./createProvider";
+import { createJsonSerializableClass } from "./createJsonSerializableClass";
+import { createModelClass } from "./createModelClass";
 
 export async function activate(context: vscode.ExtensionContext) {
   const workspaceFolder = await getWorkspaceFolder();
@@ -104,6 +108,22 @@ export async function activate(context: vscode.ExtensionContext) {
     vscode.commands.registerCommand(
       "fluttertools.generateAssetPaths",
       async () => assetManager.generateAssetPaths()
+    ),
+    vscode.commands.registerCommand(
+      "fluttertools.createClass",
+      () => createClass()
+    ),
+    vscode.commands.registerCommand(
+      "fluttertools.createProvider",
+      () => createProvider()
+    ),
+    vscode.commands.registerCommand(
+      "fluttertools.createJsonSerializableClass",
+      (uri: vscode.Uri) => createJsonSerializableClass(uri)
+    ),
+    vscode.commands.registerCommand(
+      "fluttertools.createModelClass",
+      (uri: vscode.Uri) => createModelClass(uri)
     )
   );
 

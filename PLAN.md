@@ -22,12 +22,12 @@ This document outlines the development plan for the Flutter Tools extension.
 
 ## Phase 3: Asset Management (In Progress)
 
-  - [ ] **Asset Management Helper**
-    - [x] **Asset Watcher Control**
-      - [x] Implement `fluttertools.stopAssetWatcher` command.
-      - [x] Implement `fluttertools.startAssetWatcher` command.
-      - [x] Add testing for watcher control.
-  - [x] **Automated `pubspec.yaml` Updates**
+- [ ] **Asset Management Helper**
+  - [x] **Asset Watcher Control**
+    - [x] Implement `fluttertools.stopAssetWatcher` command.
+    - [x] Implement `fluttertools.startAssetWatcher` command.
+    - [x] Add testing for watcher control.
+- [x] **Automated `pubspec.yaml` Updates**
 - [x] **Automated `pubspec.yaml` Updates**
   - [ ] Implement a file watcher for the `assets/` directory.
   - [ ] On file change (add, delete, rename), read the `assets/` directory structure.
@@ -41,6 +41,26 @@ This document outlines the development plan for the Flutter Tools extension.
     - [ ] Write unit tests for `AssetManager`.
     - [ ] Write integration tests for file watcher and `pubspec.yaml` updates.
     - [ ] Verify `flutter_gen` integration.
+
+## Phase 4: Class and Provider Generation
+
+- [ ] **Class Generation** (`fluttertools.createClass`)
+  - [ ] Implement `fluttertools.createClass` command.
+  - [ ] Create templates for:
+    - [ ] Class
+    - [ ] Sealed Class
+    - [ ] Abstract Class
+    - [ ] Interface
+    - [ ] Abstract Interface
+- [ ] **Riverpod Provider Generation** (`fluttertools.createProvider`)
+  - [ ] Implement `fluttertools.createProvider` command.
+  - [ ] Create templates for:
+    - [ ] Provider (function)
+    - [ ] Provider (class)
+- [ ] **Testing**
+  - [ ] Write unit tests for class generation.
+  - [ ] Write unit tests for Riverpod provider generation.
+  - [ ] Write integration tests for the new commands.
 
 ---
 

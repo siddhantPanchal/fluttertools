@@ -61,6 +61,21 @@ Flutter development often involves writing repetitive code for widgets, pages, a
     - **Command:** `fluttertools.generateAssetPaths`
     - **Action:** Scans the `assets/` directory and generates a `lib/constants/app_assets.dart` file containing static constants for all asset paths. This allows for type-safe, autocompletable asset access in code (e.g., `AppAssets.myImage` instead of `'assets/images/my_image.png'`).
 
+### 4.6. Class Generation
+- **Command:** `fluttertools.createClass`
+- **Description:** Creates a new Dart class from a set of predefined templates. The command will prompt the user for a class name and template choice.
+- **Templates:**
+  - Class
+  - Sealed Class
+  - Abstract Class
+  - Interface
+  - Abstract Interface
+### 4.7. Riverpod Provider Generation
+- **Command:** `fluttertools.createProvider`
+- **Description:** Creates a new Riverpod provider from a set of predefined templates. The command will prompt the user for a provider name and template choice.
+- **Templates:**
+  - Provider (function)
+  - Provider (class)
 ## 5. User Experience (UX)
 
 - **Integration:** The extension's commands are primarily accessed via a "Flutter Tools" submenu in the file explorer's right-click context menu when a folder is selected.

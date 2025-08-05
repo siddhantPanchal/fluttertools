@@ -66,13 +66,29 @@
         "command": "fluttertools.startAssetWatcher",
         "title": "Start Asset Watcher",
         "category": "Flutter Tools"
+      },
+      {
+        "command": "fluttertools.createClass",
+        "title": "Create Class...",
+        "category": "Flutter Tools"
+      },
+      {
+        "command": "fluttertools.createProvider",
+        "title": "Create Provider...",
+        "category": "Flutter Tools"
+      },
+      {
+        "command": "fluttertools.createJsonSerializableClass",
+        "title": "Create JSON Serializable Class...",
+        "category": "Flutter Tools"
+      },
+      {
+        "command": "fluttertools.createModelClass",
+        "title": "Create Model Class...",
+        "category": "Flutter Tools"
       }
     ],
     "submenus": [
-      {
-        "id": "fluttertools.submenu",
-        "label": "Flutter Tools"
-      },
       {
         "id": "fluttertools.submenu.codegen",
         "label": "Code Generation"
@@ -93,27 +109,24 @@
     "menus": {
       "explorer/context": [
         {
-          "submenu": "fluttertools.submenu",
-          "when": "explorerResourceIsFolder",
-          "group": "flutter"
-        }
-      ],
-      "fluttertools.submenu": [
-        {
           "submenu": "fluttertools.submenu.codegen",
-          "group": "1_codegen"
+          "when": "explorerResourceIsFolder",
+          "group": "flutter.codegen"
         },
         {
           "submenu": "fluttertools.submenu.assets",
-          "group": "2_assets"
+          "when": "explorerResourceIsFolder",
+          "group": "flutter.assets"
         },
         {
           "submenu": "fluttertools.submenu.dependencies",
-          "group": "3_dependencies"
+          "when": "explorerResourceIsFolder",
+          "group": "flutter.dependencies"
         },
         {
           "submenu": "fluttertools.submenu.flavors",
-          "group": "4_flavors"
+          "when": "explorerResourceIsFolder",
+          "group": "flutter.flavors"
         }
       ],
       "fluttertools.submenu.codegen": [
@@ -122,8 +135,24 @@
           "group": "1_page"
         },
         {
+          "command": "fluttertools.createClass",
+          "group": "2_class"
+        },
+        {
+          "command": "fluttertools.createProvider",
+          "group": "3_provider"
+        },
+        {
           "command": "fluttertools.freezedModel",
-          "group": "2_model"
+          "group": "4_model"
+        },
+        {
+          "command": "fluttertools.createJsonSerializableClass",
+          "group": "4_model"
+        },
+        {
+          "command": "fluttertools.createModelClass",
+          "group": "4_model"
         }
       ],
       "fluttertools.submenu.assets": [
